@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>البنية العامة لتطبيقات الويب | الدرس 3-1</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top glass-nav">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#hero">
+        <i class="fas fa-layer-group me-2"></i> البنية العامة لتطبيقات الويب
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#what">ما هو تطبيق الويب؟</a></li>
+          <li class="nav-item"><a class="nav-link" href="#layers">الطبقات الثلاث</a></li>
+          <li class="nav-item"><a class="nav-link" href="#flow">تدفق التعاون</a></li>
+          <li class="nav-item"><a class="nav-link" href="#video">فيديو التفاعل</a></li>
+          <li class="nav-item"><a class="nav-link" href="#examples">أمثلة حية</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quiz">اختبر فهمك</a></li>
+          <li class="nav-item"><a class="nav-link" href="#engineer">فكر كمهندس</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero" class="hero-section d-flex align-items-center">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="container position-relative">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2 rounded-pill">
+            <i class="fas fa-graduation-cap me-1"></i> الدرس 3-1
+          </span>
+          <h1 class="display-4 fw-bold text-white mb-3 animate__animated animate__fadeInRight">
+            البنية العامة<br />لتطبيقات الويب
+          </h1>
+          <p class="lead text-white-50 mb-4">
+            نموذج تعليمي مبسط من ثلاث طبقات: واجهة أمامية • واجهة خلفية • قاعدة بيانات
+          </p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#layers" class="btn btn-primary btn-lg px-4">
+              <i class="fas fa-play me-2"></i> ابدأ التعلم
+            </a>
+            <a href="#flow" class="btn btn-outline-light btn-lg px-4">
+              <i class="fas fa-project-diagram me-2"></i> شاهد التدفق
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-center mt-5 mt-lg-0">
+          <div class="hero-illustration">
+            <div class="layer-card frontend-glow">
+              <i class="fas fa-desktop"></i>
+              <span>الواجهة الأمامية</span>
+            </div>
+            <div class="layer-card backend-glow">
+              <i class="fas fa-server"></i>
+              <span>الواجهة الخلفية</span>
+            </div>
+            <div class="layer-card db-glow">
+              <i class="fas fa-database"></i>
+              <span>قاعدة البيانات</span>
+            </div>
+            <div class="connection-lines"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learning Objectives -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="objective-card h-100">
+            <div class="obj-icon bg-primary"><i class="fas fa-eye"></i></div>
+            <h5>تمييز الأدوار</h5>
+            <p class="mb-0">ميّز بين أدوار الواجهة الأمامية والخلفية وطبقة البيانات في نموذج تطبيق ويب مبسط.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="objective-card h-100">
+            <div class="obj-icon bg-success"><i class="fas fa-route"></i></div>
+            <h5>تتبع تدفق الطلب</h5>
+            <p class="mb-0">تتبع تدفق طلب المستخدم عبر طبقات تطبيق الويب حتى ظهور النتيجة.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="objective-card h-100">
+            <div class="obj-icon bg-warning"><i class="fas fa-balance-scale"></i></div>
+            <h5>تصميم التوزيع</h5>
+            <p class="mb-0">صمّم توزيعًا مناسبًا لمسؤوليات تطبيق ويب، وبرّر قراراتك.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Web App -->
+  <section id="what" class="py-5">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <span class="section-badge">المفهوم الأساسي</span>
+        <h2 class="fw-bold">ما هو تطبيق الويب؟</h2>
+        <p class="text-muted">تطبيق يُستخدم عادةً من خلال متصفح الويب</p>
+      </div>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="content-box">
+            <p class="fs-5">
+              عندما تبحث في موقع فيديو، أو تتسوق عبر الإنترنت، أو تستخدم بريدًا إلكترونيًا على الويب، فأنت تستخدم
+              <strong class="text-primary">تطبيق ويب</strong>.
+            </p>
+            <p>
+              تطبيق الويب هو تطبيق يُستخدم غالبًا من خلال المتصفح. وقد تسمح بعض تطبيقات الويب بتثبيتها على الجهاز.
+              وخلف ما تراه، قد تعمل أجزاء مختلفة معًا.
+            </p>
+            <div class="alert alert-info d-flex align-items-start mt-4">
+              <i class="fas fa-lightbulb fa-2x me-3 text-warning"></i>
+              <div>
+                <strong>نموذج مبسط:</strong> العرض، والمعالجة، والبيانات.
+                يمكن فهم كثير من تطبيقات الويب بنموذج تعليمي مبسط من ثلاث طبقات.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="examples-grid">
+            <div class="ex-item" data-aos="zoom-in">
+              <i class="fas fa-video text-danger"></i>
+              <span>خدمات الفيديو</span>
+            </div>
+            <div class="ex-item" data-aos="zoom-in">
+              <i class="fas fa-shopping-cart text-success"></i>
+              <span>التسوق الإلكتروني</span>
+            </div>
+            <div class="ex-item" data-aos="zoom-in">
+              <i class="fas fa-envelope text-primary"></i>
+              <span>البريد الإلكتروني</span>
+            </div>
+            <div class="ex-item" data-aos="zoom-in">
+              <i class="fas fa-map-marked-alt text-warning"></i>
+              <span>الخرائط</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three Layers -->
+  <section id="layers" class="py-5 bg-gradient-layers">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <span class="section-badge light">البنية الأساسية</span>
+        <h2 class="fw-bold text-white">الطبقات الثلاث لتطبيق الويب</h2>
+        <p class="text-white-50">في هذا النموذج التعليمي، نقسم تطبيق الويب إلى ثلاثة أجزاء رئيسة</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Frontend -->
+        <div class="col-lg-4">
+          <div class="layer-detail-card frontend-card h-100" data-layer="frontend">
+            <div class="layer-header">
+              <div class="layer-icon"><i class="fas fa-desktop"></i></div>
+              <h3>الواجهة الأمامية</h3>
+              <span class="layer-en">Frontend</span>
+            </div>
+            <div class="layer-body">
+              <p class="role-text">
+                الجزء الذي يراه المستخدم ويتعامل معه في المتصفح: يعرض المحتوى ويستقبل ما يكتبه المستخدم أو يختاره.
+              </p>
+              <h6><i class="fas fa-check-circle text-success me-1"></i> أمثلة:</h6>
+              <ul>
+                <li>شاشة البحث</li>
+                <li>صفحات عرض المنتجات</li>
+                <li>نماذج الإدخال</li>
+              </ul>
+              <div class="layer-tags">
+                <span class="tag">عرض</span>
+                <span class="tag">تفاعل</span>
+                <span class="tag">تجميع</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="col-lg-4">
+          <div class="layer-detail-card backend-card h-100" data-layer="backend">
+            <div class="layer-header">
+              <div class="layer-icon"><i class="fas fa-server"></i></div>
+              <h3>الواجهة الخلفية</h3>
+              <span class="layer-en">Backend</span>
+            </div>
+            <div class="layer-body">
+              <p class="role-text">
+                الجزء الذي يعمل على الخادم، ويعالج الطلبات ويطبق قواعد التطبيق.
+              </p>
+              <h6><i class="fas fa-check-circle text-success me-1"></i> أمثلة:</h6>
+              <ul>
+                <li>البحث عن منتجات تطابق معايير البحث</li>
+                <li>التحقق من تسجيل الدخول</li>
+                <li>معالجة الدفع</li>
+              </ul>
+              <div class="layer-tags">
+                <span class="tag">معالجة</span>
+                <span class="tag">تحكم</span>
+                <span class="tag">قواعد</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="col-lg-4">
+          <div class="layer-detail-card db-card h-100" data-layer="database">
+            <div class="layer-header">
+              <div class="layer-icon"><i class="fas fa-database"></i></div>
+              <h3>قاعدة البيانات</h3>
+              <span class="layer-en">Database</span>
+            </div>
+            <div class="layer-body">
+              <p class="role-text">
+                طبقة تحفظ البيانات وتوفرها عند الحاجة. وقد تشمل قواعد بيانات أو تخزين ملفات أو ذاكرة مخبأة أو خدمات بيانات خارجية.
+              </p>
+              <h6><i class="fas fa-check-circle text-success me-1"></i> أمثلة:</h6>
+              <ul>
+                <li>معلومات المنتجات</li>
+                <li>معلومات المستخدمين</li>
+                <li>سجل الطلبات</li>
+              </ul>
+              <div class="layer-tags">
+                <span class="tag">تخزين</span>
+                <span class="tag">استرجاع</span>
+                <span class="tag">إدارة</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <div class="reminder-box">
+          <i class="fas fa-star text-warning"></i>
+          <strong>تذكر:</strong> الواجهة الأمامية تعرض وتجمع، والواجهة الخلفية تقرر وتعالج، وقاعدة البيانات تخزن وتسترجع.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collaboration Flow -->
+  <section id="flow" class="py-5">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <span class="section-badge">كيف تعمل معًا؟</span>
+        <h2 class="fw-bold">تدفق تعاون الطبقات الثلاث</h2>
+        <p class="text-muted">مثال: البحث عن منتج في متجر إلكتروني</p>
+      </div>
+
+      <div class="flow-container">
+        <div class="flow-controls text-center mb-4">
+          <button id="playFlow" class="btn btn-primary btn-lg px-4">
+            <i class="fas fa-play me-2"></i> تشغيل التدفق التفاعلي
+          </button>
+          <button id="resetFlow" class="btn btn-outline-secondary btn-lg px-4 ms-2" disabled>
+            <i class="fas fa-redo me-2"></i> إعادة
+          </button>
+        </div>
+
+        <div class="flow-visual">
+          <div class="flow-step" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-icon frontend-bg"><i class="fas fa-keyboard"></i></div>
+            <div class="step-content">
+              <h5>المستخدم يكتب</h5>
+              <p>تستقبل الواجهة الأمامية كلمات البحث التي أدخلها المستخدم</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+
+          <div class="flow-step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-icon frontend-bg"><i class="fas fa-paper-plane"></i></div>
+            <div class="step-content">
+              <h5>إرسال الطلب</h5>
+              <p>ترسل الواجهة الأمامية كلمات البحث إلى الواجهة الخلفية</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+
+          <div class="flow-step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-icon backend-bg"><i class="fas fa-cogs"></i></div>
+            <div class="step-content">
+              <h5>طلب البيانات</h5>
+              <p>تطلب الواجهة الخلفية من طبقة البيانات المنتجات التي تطابق عبارة البحث</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+
+          <div class="flow-step" data-step="4">
+            <div class="step-number">4</div>
+            <div class="step-icon db-bg"><i class="fas fa-search"></i></div>
+            <div class="step-content">
+              <h5>استرجاع النتائج</h5>
+              <p>تعيد طبقة البيانات النتائج المطلوبة إلى الواجهة الخلفية</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+
+          <div class="flow-step" data-step="5">
+            <div class="step-number">5</div>
+            <div class="step-icon backend-bg"><i class="fas fa-file-alt"></i></div>
+            <div class="step-content">
+              <h5>تجهيز الاستجابة</h5>
+              <p>تجهز الواجهة الخلفية النتائج لإرسالها إلى الواجهة الأمامية</p>
+            </div>
+          </div>
+          <div class="flow-arrow"><i class="fas fa-arrow-down"></i></div>
+
+          <div class="flow-step" data-step="6">
+            <div class="step-number">6</div>
+            <div class="step-icon frontend-bg"><i class="fas fa-eye"></i></div>
+            <div class="step-content">
+              <h5>عرض النتيجة</h5>
+              <p>تعرض الواجهة الأمامية نتائج البحث على شاشة المستخدم</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="live-demo mt-5 p-4 rounded-4 bg-dark text-white">
+          <h5 class="mb-3"><i class="fas fa-terminal me-2"></i> محاكاة حية للطلب</h5>
+          <div id="liveLog" class="live-log font-monospace small"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video: Layers Interaction -->
+  <section id="video" class="py-5 bg-dark text-white">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <span class="section-badge light">فيديو توضيحي</span>
+        <h2 class="fw-bold text-white">تفاعل الطبقات الثلاث</h2>
+        <p class="text-white-50">شاهد كيف ينتقل الطلب من المستخدم عبر الواجهة الأمامية ثم الخلفية ثم قاعدة البيانات ويعود بالنتيجة</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="video-wrapper rounded-4 overflow-hidden shadow-lg border border-secondary">
+            <video id="layersVideo" controls playsinline class="w-100" style="max-height: 540px; background: #0f172a;">
+              <source src="layers_interaction.mp4" type="video/mp4" />
+              متصفحك لا يدعم تشغيل الفيديو.
+            </video>
+          </div>
+          <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+            <button id="replayVideo" class="btn btn-primary px-4">
+              <i class="fas fa-redo me-2"></i> إعادة التشغيل
+            </button>
+            <a href="layers_interaction.mp4" download class="btn btn-outline-light px-4">
+              <i class="fas fa-download me-2"></i> تحميل الفيديو
+            </a>
+          </div>
+          <div class="row g-3 mt-4 text-center">
+            <div class="col-md-4">
+              <div class="p-3 rounded-3" style="background: rgba(13,110,253,0.15); border: 1px solid rgba(13,110,253,0.4);">
+                <i class="fas fa-desktop fa-2x mb-2 text-primary"></i>
+                <div class="fw-bold">الواجهة الأمامية</div>
+                <small class="text-white-50">تستقبل وتعرض</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 rounded-3" style="background: rgba(25,135,84,0.15); border: 1px solid rgba(25,135,84,0.4);">
+                <i class="fas fa-server fa-2x mb-2 text-success"></i>
+                <div class="fw-bold">الواجهة الخلفية</div>
+                <small class="text-white-50">تعالج وتقرر</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 rounded-3" style="background: rgba(253,126,20,0.15); border: 1px solid rgba(253,126,20,0.4);">
+                <i class="fas fa-database fa-2x mb-2 text-warning"></i>
+                <div class="fw-bold">قاعدة البيانات</div>
+                <small class="text-white-50">تخزّن وتسترجع</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Examples -->
+  <section id="examples" class="py-5 bg-light">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <span class="section-badge">تطبيق عملي</span>
+        <h2 class="fw-bold">إعدادات تطبيقات الويب المألوفة</h2>
+        <p class="text-muted">كيف توزع المهام نفسها على الطبقات الثلاث في خدمات مختلفة؟</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover examples-table align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>الخدمة</th>
+              <th class="frontend-col">الواجهة الأمامية<br /><small>(العرض والتفاعل)</small></th>
+              <th class="backend-col">الواجهة الخلفية<br /><small>(المعالجة والتحكم)</small></th>
+              <th class="db-col">قاعدة البيانات<br /><small>(التخزين والإدارة)</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="fw-bold"><i class="fas fa-play-circle text-danger me-2"></i> موقع مشاركة الفيديو</td>
+              <td>عرض شاشات تشغيل الفيديو والبحث؛ استقبال إجراءات المستخدم</td>
+              <td>اختيار الفيديوهات الموصى بها؛ تجميع عدد المشاهدات</td>
+              <td>تخزين بيانات الفيديو، ومعلومات المستخدمين، وسجل المشاهدة</td>
+            </tr>
+            <tr>
+              <td class="fw-bold"><i class="fas fa-users text-primary me-2"></i> شبكة التواصل الاجتماعي</td>
+              <td>عرض الخط الزمني وشاشات النشر؛ إرسال المحتوى المُدخل</td>
+              <td>تحديد الجمهور المستهدف للمنشورات؛ التحكم في الإشعارات الفورية</td>
+              <td>تخزين بيانات المنشورات، وعلاقات المتابعة، والرسائل</td>
+            </tr>
+            <tr>
+              <td class="fw-bold"><i class="fas fa-store text-success me-2"></i> موقع تجارة إلكترونية</td>
+              <td>عرض قوائم المنتجات وشاشات سلة التسوق؛ استقبال عمليات الطلب</td>
+              <td>التحقق من المخزون؛ إرسال طلبات الدفع والتعامل مع نتائجها</td>
+              <td>تخزين معلومات المنتجات، وسجل الطلبات، ومعلومات العملاء</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-primary mt-4">
+        <i class="fas fa-lightbulb me-2"></i>
+        <strong>الفكرة الرئيسية:</strong> تُبنى تقريبًا كل خدمة عبر الإنترنت — الفيديو، والتواصل الاجتماعي، والتسوق — على نفس الطبقات الثلاث: واجهة أمامية تعرض وتجمع، وواجهة خلفية تقرر وتعالج، وقاعدة بيانات تخزن وتسترجع.
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Quiz -->
+  <section id="quiz" class="py-5">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <span class="section-badge">تدريب</span>
+        <h2 class="fw-bold">اختبر فهمك</h2>
+        <p class="text-muted">أجب عن الأسئلة التالية وتلقَّ تغذية راجعة فورية</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div id="quizContainer">
+            <!-- Quiz questions injected by JS -->
+          </div>
+          <div class="text-center mt-4">
+            <button id="checkQuiz" class="btn btn-success btn-lg px-5">
+              <i class="fas fa-check-double me-2"></i> تحقق من الإجابات
+            </button>
+            <button id="resetQuiz" class="btn btn-outline-secondary btn-lg px-4 ms-2 d-none">
+              <i class="fas fa-redo me-2"></i> إعادة الاختبار
+            </button>
+          </div>
+          <div id="quizResult" class="mt-4 d-none"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Think like Engineer -->
+  <section id="engineer" class="py-5 bg-gradient-engineer">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <span class="section-badge light">تحدي</span>
+        <h2 class="fw-bold text-white">فكر كمهندس: ابحث ثم قرر</h2>
+        <p class="text-white-50">تريد عيادة تطبيق ويب يحجز فيه المرضى المواعيد، ويتحققون من الأوقات المتاحة، ويطّلعون على زياراتهم السابقة</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="challenge-card h-100">
+            <div class="challenge-num">1</div>
+            <h5>وزّع المهام</h5>
+            <p>بالنسبة لثلاث ميزات – نموذج الحجز، والتحقق من الأوقات المتاحة، وتخزين الزيارات السابقة – حدد أي طبقة ينبغي أن تتولى كل منها، ولماذا.</p>
+            <button class="btn btn-sm btn-outline-light reveal-btn" data-target="answer1">
+              <i class="fas fa-eye me-1"></i> أظهر نموذج الحل
+            </button>
+            <div id="answer1" class="answer-box d-none mt-3">
+              <ul class="mb-0">
+                <li><strong>نموذج الحجز:</strong> الواجهة الأمامية (تجمع بيانات المستخدم)</li>
+                <li><strong>التحقق من الأوقات:</strong> الواجهة الخلفية (تطبق قواعد التوافر وتستعلم)</li>
+                <li><strong>تخزين الزيارات:</strong> قاعدة البيانات (تحفظ السجلات)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="challenge-card h-100">
+            <div class="challenge-num">2</div>
+            <h5>شخّص العطل</h5>
+            <p>تفتح صفحة الحجز، لكن لا تظهر أوقات متاحة. ما الأجزاء التي قد تكون سبب المشكلة؟ وما المعلومة التي تحتاج إليها لتتأكد؟</p>
+            <button class="btn btn-sm btn-outline-light reveal-btn" data-target="answer2">
+              <i class="fas fa-eye me-1"></i> أظهر نموذج الحل
+            </button>
+            <div id="answer2" class="answer-box d-none mt-3">
+              <p class="mb-1">الأسباب المحتملة:</p>
+              <ul class="mb-0">
+                <li>الواجهة الأمامية لا ترسل الطلب بشكل صحيح</li>
+                <li>الواجهة الخلفية تفشل في الاستعلام أو ترجع خطأ</li>
+                <li>قاعدة البيانات فارغة أو غير متاحة</li>
+              </ul>
+              <p class="mt-2 mb-0 small">تحتاج إلى: سجلات الخادم، حالة الاتصال، واستجابة API.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="challenge-card h-100">
+            <div class="challenge-num">3</div>
+            <h5>قرّر</h5>
+            <p>أوصِ بما إذا كان ينبغي للعيادة أن تنظّم مسؤوليات العرض والمعالجة والبيانات في طبقات واضحة، وبرّر فائدة فصل المسؤوليات بسببين.</p>
+            <button class="btn btn-sm btn-outline-light reveal-btn" data-target="answer3">
+              <i class="fas fa-eye me-1"></i> أظهر نموذج الحل
+            </button>
+            <div id="answer3" class="answer-box d-none mt-3">
+              <p class="mb-1"><strong>نعم، يجب الفصل.</strong></p>
+              <ul class="mb-0">
+                <li>يسهل الصيانة والتطوير المستقل لكل طبقة</li>
+                <li>يحسّن الأمان (إخفاء قواعد العمل عن العميل) وقابلية التوسع</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="py-5">
+    <div class="container">
+      <div class="summary-box text-center p-5 rounded-4">
+        <h3 class="fw-bold mb-3"><i class="fas fa-bookmark text-primary me-2"></i> الخلاصة</h3>
+        <p class="fs-5 mb-4">
+          تذكّر: الواجهة الأمامية <strong>تعرض وتجمع</strong>، والواجهة الخلفية <strong>تقرر وتعالج</strong>، وقاعدة البيانات <strong>تخزن وتسترجع</strong> — ثلاث طبقات متعاونة تجعل تطبيق الويب يعمل.
+        </p>
+        <div class="row g-3 justify-content-center">
+          <div class="col-auto">
+            <div class="summary-pill frontend-pill">عرض + تفاعل</div>
+          </div>
+          <div class="col-auto">
+            <div class="summary-pill backend-pill">معالجة + قواعد</div>
+          </div>
+          <div class="col-auto">
+            <div class="summary-pill db-pill">تخزين + استرجاع</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 bg-dark text-white-50 text-center">
+    <div class="container">
+      <p class="mb-0">درس تعليمي تفاعلي • البنية العامة لتطبيقات الويب • الدرس 3-1</p>
+      <small>صُمم بأسلوب احترافي لتسهيل الفهم والتذكر</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
